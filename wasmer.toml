@@ -1,6 +1,6 @@
 [package]
 name = "0azuree/doge-remote-build"
-version = "0.2.0"
+version = "0.2.1"
 description = "Doge project built remotely via custom npm/Vite script."
 
 [dependencies]
