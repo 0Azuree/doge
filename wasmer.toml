@@ -1,13 +1,13 @@
 [package]
-name = "0azuree/doge-static"
-version = "0.1.0"
-description = "The static build output of the Doge project."
+name = "0azuree/doge-remote-build"
+version = "0.2.0"
+description = "Doge project built remotely via custom npm/Vite script."
 
 [dependencies]
 "wasmer/static-web-server" = "^1"
 
-# CRITICAL: This maps your local build output (dist) to the /public folder
-# expected by the static web server module.
+# The final, built assets will be in the 'dist' directory, 
+# which we map to the web server's root ('/public').
 [fs]
 "/public" = "dist"
 
@@ -15,3 +15,10 @@ description = "The static build output of the Doge project."
 name = "start"
 module = "wasmer/static-web-server:webserver"
 runner = "https://webc.org/runner/wasi"
+
+# CRITICAL: Define the custom build process here.
+# This runs 'npm install' then 'npm run build' remotely.
+[build]
+program = "sh"
+program_args = ["-c", "npm install && npm run build"]
+program_dir = "."
