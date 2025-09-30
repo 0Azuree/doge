@@ -1,0 +1,17 @@
+[package]
+name = "0azuree/doge-static"
+version = "0.1.0"
+description = "The static build output of the Doge project."
+
+[dependencies]
+"wasmer/static-web-server" = "^1"
+
+# CRITICAL: This maps your local build output (dist) to the /public folder
+# expected by the static web server module.
+[fs]
+"/public" = "dist"
+
+[[command]]
+name = "start"
+module = "wasmer/static-web-server:webserver"
+runner = "https://webc.org/runner/wasi"
